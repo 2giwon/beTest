@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
+android {
+    compileSdkVersion AndroidConfig.COMPILE_SDK
+
+    defaultConfig {
+        applicationId AndroidConfig.APP_ID
+        minSdkVersion AndroidConfig.MIN_SDK
+        targetSdkVersion AndroidConfig.COMPILE_SDK
+        versionCode AndroidConfig.VERSION_CODE
+        versionName AndroidConfig.VERSION_NAME
+
+        testInstrumentationRunner AndroidConfig.TEST_INSTRUMENTATION_RUNNER
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation Dependencies.KOTLIN_STDLIB
+    implementation Dependencies.MATERIAL
+    implementation Dependencies.CORE_KTX
+    implementation Dependencies.CONSTRAINT_LAYOUT
+
+    implementation Dependencies.GLIDE
+
+    implementation Dependencies.FRAGMENT_KTX
+
+    implementation Dependencies.HILT_ANDROID
+    implementation Dependencies.DAGGER_HILT_LIFECYCLE_VM
+    kapt Dependencies.HILT_ANDROID_COMPILER
+    kapt Dependencies.HILT_COMPILER
+
+    implementation NetworkDependencies.RETROFIT
+    implementation NetworkDependencies.RXJAVA_ADAPTER
+    implementation NetworkDependencies.CONVERTER_GSON
+    implementation NetworkDependencies.LOGGING_INTERCEPTOR
+
+    implementation Dependencies.RXJAVA
+    implementation Dependencies.RX_ANDROID
+    implementation Dependencies.RX_KOTLIN
+    implementation Dependencies.RX_BINDING
+
+    testImplementation TestDependencies.JUNIT
+    androidTestImplementation TestDependencies.EXT_JUNIT
+    androidTestImplementation TestDependencies.ESPRESSO
+
+}
