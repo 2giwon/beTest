@@ -4,4 +4,8 @@
     <string name="menu_cart">Cart</string>
     <string name="menu_my">My</string>
     <string name="menu_more">More</string>
+    <string name="error_load_fail_shop_info">shop 데이터를 불러오지 못했습니다.</string>
+    <string name="BTS">BTS</string>
+    <string name="TXT">TXT</string>
+    <string name="product_title">상품</string>
 </resources>
