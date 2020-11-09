@@ -8,4 +8,6 @@
     <string name="BTS">BTS</string>
     <string name="TXT">TXT</string>
     <string name="product_title">상품</string>
+    <string name="recently_sales_title">최근 본 상품</string>
+    <string name="notice_title">공지 사항</string>
 </resources>
