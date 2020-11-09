@@ -35,6 +35,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,7 +78,7 @@
                     tools:text="상품" />
 
                 <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tl_content"
+                    android:id="@+id/tl_shops"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
@@ -87,20 +88,110 @@
                     app:tabMode="scrollable" />
 
                 <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vp_content"
+                    android:id="@+id/vp_shops"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:layout_constraintTop_toBottomOf="@id/tl_content" />
+                    app:layout_constraintTop_toBottomOf="@id/tl_shops" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:background="@color/colorAccent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vp_shops" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_recently_sales"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/divider2"
+                    tools:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_recently_sales"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/recently_sales_title"
+                        android:textSize="22dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="최근 본 상품" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_recently_sales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/tv_recently_sales"
+                        tools:listitem="@layout/item_recently_sale" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="0dp"
+                        android:layout_height="20dp"
+                        android:background="@color/colorAccent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rv_recently_sales" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_notice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/notice_title"
+                    android:textSize="22dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/layout_recently_sales"
+                    tools:text="공지 사항" />
+
+                <com.egiwon.benxtest.shop.product.NoScrollRecyclerView
+                    android:id="@+id/rv_notices"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tv_notice"
+                    app:replaceItem="@{vm.noticeItems}"
+                    tools:listitem="@layout/item_notice" />
 
                 <ProgressBar
                     android:id="@+id/loading_progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="@{vm.loadingBar ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="@id/tl_content"
+                    app:layout_constraintBottom_toBottomOf="@id/tl_shops"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorAccent"
+                    android:padding="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_notices">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_upward"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/oval_button"
+                        android:src="@drawable/ic_round_arrow_upward_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
