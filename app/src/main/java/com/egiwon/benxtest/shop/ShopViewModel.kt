@@ -9,6 +9,7 @@ import com.egiwon.benxtest.data.ShopRepository
 import com.egiwon.benxtest.data.entity.ShopInfoResponse
 import com.egiwon.benxtest.shop.artist.ARTIST
 import com.egiwon.benxtest.shop.model.Banner
+import com.egiwon.benxtest.shop.model.Notice
 import com.egiwon.benxtest.shop.model.SaleItem
 import com.egiwon.benxtest.shop.model.ShopItem
 import com.egiwon.benxtest.shop.model.mapToShopInfo
@@ -36,8 +37,13 @@ class ShopViewModel @ViewModelInject constructor(
     private val _shopItems = MutableLiveData<List<ShopItem>>()
     val shopItems: LiveData<List<ShopItem>> get() = _shopItems
 
-    private val _saleItems = MutableLiveData<List<SaleItem>>()
-    val saleItems: LiveData<List<SaleItem>> get() = _saleItems
+    private val _mapSaleItems = MutableLiveData<Map<Int, List<SaleItem>>>()
+    val mapSaleItems: LiveData<Map<Int, List<SaleItem>>> get() = _mapSaleItems
+
+    private val _noticeItems = MutableLiveData<List<Notice>>()
+    val noticeItems: LiveData<List<Notice>> get() = _noticeItems
+
+    private val _map = HashMap<Int, List<SaleItem>>()
 
     fun loadShopInfo(artistId: Int = ARTIST.BTS.value) {
         repository.loadShopInfo(artistId)
@@ -51,6 +57,7 @@ class ShopViewModel @ViewModelInject constructor(
                     _artistId.value = artistId
                     _banners.value = it.banners
                     _shopItems.value = it.shopItems
+                    _noticeItems.value = it.notices
                 },
                 onError = { toastMessageMutableLiveData.value = R.string.error_load_fail_shop_info }
             )
@@ -63,7 +70,8 @@ class ShopViewModel @ViewModelInject constructor(
 
             for (shopItem: ShopItem in list) {
                 if (shopItem.category.id == categoryId) {
-                    _saleItems.value = shopItem.saleItems
+                    _map[categoryId] = shopItem.saleItems
+                    _mapSaleItems.value = _map
                 }
             }
         }

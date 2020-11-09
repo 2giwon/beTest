@@ -30,6 +30,7 @@ class ProductFragment : BaseFragment<FragmentSalesBinding, ShopViewModel>(
         }
 
         arguments?.getInt(KEY_CATEGORY_ID)?.let {
+            binding.categoryId = it
             viewModel.getShopItems(it)
         }
     }

@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="java.util.Map" />
+
+        <variable
+            name="categoryId"
+            type="int" />
+
         <variable
             name="vm"
             type="com.egiwon.benxtest.shop.ShopViewModel" />
@@ -20,7 +26,7 @@
             android:layout_height="wrap_content"
             app:layoutManager="GridLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
-            app:replaceItem="@{vm.saleItems}"
+            app:replaceItem="@{vm.mapSaleItems.get(categoryId)}"
             app:spanCount="2"
             tools:listitem="@layout/item_product" />
 
