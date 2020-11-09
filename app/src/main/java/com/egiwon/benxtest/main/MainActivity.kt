@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
 
         initBottomNavigationView()
         setSelectItemListener()
+        binding.bottomNavigationView.setOnNavigationItemReselectedListener {
+
+        }
     }
 
     private fun setSelectItemListener() {
