@@ -10,4 +10,5 @@
     <string name="product_title">상품</string>
     <string name="recently_sales_title">최근 본 상품</string>
     <string name="notice_title">공지 사항</string>
+    <string name="notice_date">"%1$tY.%1$tm.%1$td"</string>
 </resources>

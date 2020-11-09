@@ -10,6 +10,9 @@ import com.egiwon.benxtest.base.BaseAdapter
 import com.egiwon.benxtest.shop.banner.BannerAdapter
 import com.egiwon.benxtest.shop.model.Banner
 import java.text.DecimalFormat
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("replaceBannerItem")
 fun replaceBannerItem(recyclerView: RecyclerView, items: List<Banner>?) {
@@ -48,4 +51,18 @@ fun ImageView.loadImageUrlByGlide(imageUrl: String?) {
 fun textToPrice(textView: AppCompatTextView, price: Int) {
     val decimalFormat = DecimalFormat("#,##0")
     textView.text = decimalFormat.format(price)
+}
+
+@BindingAdapter("textToDate")
+fun textToDate(textView: AppCompatTextView, text: String) {
+    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+    try {
+        val date = simpleDateFormat.parse(text) ?: return
+        val newFormat = SimpleDateFormat("yyyy.MM.dd", Locale.getDefault())
+
+        textView.text = newFormat.format(date)
+    } catch (ex: ParseException) {
+        textView.text = text
+    }
+
 }
