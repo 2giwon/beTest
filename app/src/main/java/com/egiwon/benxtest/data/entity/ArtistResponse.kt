@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class ArtistResponse(
     @SerializedName("id")
-    val id: Int,
+    val id: Int = 0,
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    val imageUrl: String = "",
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("shops")
-    val shops: List<String>
+    val shops: List<String> = emptyList()
 )

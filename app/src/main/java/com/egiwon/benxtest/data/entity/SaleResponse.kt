@@ -4,21 +4,21 @@ import com.google.gson.annotations.SerializedName
 
 data class SaleResponse(
     @SerializedName("id")
-    val id: Int,
+    val id: Int = 0,
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    val imageUrl: String = "",
     @SerializedName("isFcOnly")
-    val isFcOnly: Boolean,
+    val isFcOnly: Boolean = false,
     @SerializedName("isMonopoly")
-    val isMonopoly: Boolean,
+    val isMonopoly: Boolean = false,
     @SerializedName("isPreOrder")
-    val isPreOrder: Boolean,
+    val isPreOrder: Boolean = false,
     @SerializedName("isSoldOut")
-    val isSoldOut: Boolean,
+    val isSoldOut: Boolean = false,
     @SerializedName("name")
-    val name: String,
+    val name: String = "",
     @SerializedName("originalPrice")
-    val originalPrice: Int,
+    val originalPrice: Int = 0,
     @SerializedName("salePrice")
-    val salePrice: Int
+    val salePrice: Int = 0
 )

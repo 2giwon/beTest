@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class NoticeResponse(
     @SerializedName("date")
-    val date: String,
+    val date: String = "",
     @SerializedName("id")
-    val id: Int,
+    val id: Int = 0,
     @SerializedName("isNew")
-    val isNew: Boolean,
+    val isNew: Boolean = false,
     @SerializedName("title")
-    val title: String
+    val title: String = ""
 )

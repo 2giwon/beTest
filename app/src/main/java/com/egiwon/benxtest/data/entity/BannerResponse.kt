@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 data class BannerResponse(
     @SerializedName("imageUrl")
-    val imageUrl: String,
+    val imageUrl: String = "",
     @SerializedName("subTitle")
-    val subTitle: String,
+    val subTitle: String = "",
     @SerializedName("title")
-    val title: String
+    val title: String = ""
 )
