@@ -30,6 +30,8 @@ object Dependencies {
     const val CORE_KTX = "androidx.core:core-ktx:1.3.0"
     const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:1.1.3"
 
+    const val SWIPE_REFRESH_LAYOUT = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
     const val HILT_ANDROID = "com.google.dagger:hilt-android:$HILT_VER"
     const val HILT_ANDROID_COMPILER = "com.google.dagger:hilt-android-compiler:$HILT_VER"
 

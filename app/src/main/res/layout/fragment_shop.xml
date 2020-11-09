@@ -29,177 +29,172 @@
                 android:layout_height="match_parent"
                 android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                 android:gravity="center"
-                android:textSize="22dp"
+                android:textSize="24dp"
                 tools:text="BTS GLOBAL" />
 
         </androidx.appcompat.widget.Toolbar>
 
-        <ScrollView
-            android:id="@+id/scroll_view"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ScrollView
+                android:id="@+id/scroll_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_banner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="LinearLayoutManager"
-                    app:layout_constraintBottom_toTopOf="@id/divider"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:replaceBannerItem="@{vm.banners}"
-                    tools:listitem="@layout/item_banner" />
-
-                <include
-                    android:id="@+id/divider"
-                    layout="@layout/layout_divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/rv_banner" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_sales_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="@string/product_title"
-                    android:textSize="22dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider"
-                    tools:text="상품" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tl_shops"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_sales_title"
-                    app:tabGravity="fill"
-                    app:tabMode="scrollable" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/vp_shops"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintTop_toBottomOf="@id/tl_shops" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button_show_all_sales"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="@string/show_all_products_text"
-                    app:layout_constraintTop_toBottomOf="@id/vp_shops" />
-
-                <include
-                    android:id="@+id/divider2"
-                    layout="@layout/layout_divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/button_show_all_sales" />
+                android:layout_height="match_parent"
+                android:overScrollMode="never">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layout_recently_sales"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/divider2"
-                    tools:visibility="visible">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_recently_sales"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="@string/recently_sales_title"
-                        android:textSize="22dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:text="최근 본 상품" />
+                    android:layout_height="wrap_content">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_recently_sales"
+                        android:id="@+id/rv_banner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintTop_toBottomOf="@id/tv_recently_sales"
-                        tools:listitem="@layout/item_recently_sale" />
+                        app:layoutManager="LinearLayoutManager"
+                        app:layout_constraintBottom_toTopOf="@id/divider"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:replaceBannerItem="@{vm.banners}"
+                        tools:listitem="@layout/item_banner" />
 
                     <include
-                        android:id="@+id/divider3"
+                        android:id="@+id/divider"
                         layout="@layout/layout_divider"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/rv_recently_sales" />
+                        app:layout_constraintTop_toBottomOf="@id/rv_banner" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_notice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:text="@string/notice_title"
-                    android:textSize="22dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/layout_recently_sales"
-                    tools:text="공지 사항" />
-
-                <com.egiwon.benxtest.shop.product.NoScrollRecyclerView
-                    android:id="@+id/rv_notices"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/tv_notice"
-                    app:replaceItem="@{vm.noticeItems}"
-                    tools:listitem="@layout/item_notice" />
-
-                <ProgressBar
-                    android:id="@+id/loading_progress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="@{vm.loadingBar ? View.VISIBLE : View.GONE}"
-                    app:layout_constraintBottom_toBottomOf="@id/tl_shops"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/colorAccent"
-                    android:padding="24dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_notices">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/iv_upward"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/oval_button"
-                        android:src="@drawable/ic_round_arrow_upward_24"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_sales_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/product_title"
+                        android:textSize="22dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/divider"
+                        tools:text="상품" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tl_shops"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_sales_title"
+                        app:tabGravity="fill"
+                        app:tabMode="scrollable" />
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp_shops"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toBottomOf="@id/tl_shops" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/button_show_all_sales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/show_all_products_text"
+                        app:layout_constraintTop_toBottomOf="@id/vp_shops" />
+
+                    <include
+                        android:id="@+id/divider2"
+                        layout="@layout/layout_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/button_show_all_sales" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_recently_sales"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/divider2"
+                        tools:visibility="visible">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_recently_sales"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:text="@string/recently_sales_title"
+                            android:textSize="24dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="최근 본 상품" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_recently_sales"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintTop_toBottomOf="@id/tv_recently_sales"
+                            tools:listitem="@layout/item_recently_sale" />
+
+                        <include
+                            android:id="@+id/divider3"
+                            layout="@layout/layout_divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/rv_recently_sales" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_notice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:text="@string/notice_title"
+                        android:textSize="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/layout_recently_sales"
+                        tools:text="공지 사항" />
+
+                    <com.egiwon.benxtest.shop.product.NoScrollRecyclerView
+                        android:id="@+id/rv_notices"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@id/tv_notice"
+                        app:replaceItem="@{vm.noticeItems}"
+                        tools:listitem="@layout/item_notice" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorAccent"
+                        android:padding="24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/rv_notices">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_upward"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/oval_button"
+                            android:src="@drawable/ic_round_arrow_upward_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        </ScrollView>
-
-
+            </ScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

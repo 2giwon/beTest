@@ -31,11 +31,8 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
         with(binding) {
             vm = viewModel
             initAdapter()
-            ivUpward.setOnClickListener {
-                scrollView.post {
-                    scrollView.smoothScrollTo(0, 0)
-                }
-            }
+            setClickScrollToTop()
+            swipeContainer.setOnRefreshListener { viewModel.loadShopInfo() }
         }
         viewModel.loadShopInfo()
     }
@@ -78,6 +75,18 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
         viewModel.shopItems.observe(viewLifecycleOwner, Observer {
             initViewPager(it)
         })
+
+        viewModel.loadingBar.observe(viewLifecycleOwner, Observer {
+            binding.swipeContainer.isRefreshing = it
+        })
+    }
+
+    private fun FragmentShopBinding.setClickScrollToTop() {
+        ivUpward.setOnClickListener {
+            scrollView.post {
+                scrollView.smoothScrollTo(0, 0)
+            }
+        }
     }
 }
 
