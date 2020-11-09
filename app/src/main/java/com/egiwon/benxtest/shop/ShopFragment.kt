@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.egiwon.benxtest.BR
 import com.egiwon.benxtest.R
+import com.egiwon.benxtest.base.BaseAdapter
 import com.egiwon.benxtest.base.BaseFragment
 import com.egiwon.benxtest.databinding.FragmentShopBinding
 import com.egiwon.benxtest.shop.artist.ARTIST
 import com.egiwon.benxtest.shop.banner.BannerAdapter
+import com.egiwon.benxtest.shop.model.Notice
 import com.egiwon.benxtest.shop.model.ShopItem
 import com.egiwon.benxtest.shop.product.ProductFragment
 import com.egiwon.benxtest.shop.product.tab.ProductCategoryAdapter
@@ -29,6 +31,11 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
         with(binding) {
             vm = viewModel
             initAdapter()
+            ivUpward.setOnClickListener {
+                scrollView.post {
+                    scrollView.smoothScrollTo(0, 0)
+                }
+            }
         }
         viewModel.loadShopInfo()
     }
@@ -37,6 +44,10 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
         val snapHelper: SnapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(rvBanner)
         rvBanner.adapter = BannerAdapter(R.layout.item_banner, BR.banner)
+        rvNotices.adapter = object : BaseAdapter<Notice>(
+            R.layout.item_notice,
+            BR.notice
+        ) {}
     }
 
     private fun initViewPager(saleItems: List<ShopItem>) {
@@ -46,8 +57,8 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
         }
 
         with(binding) {
-            vpContent.adapter = ProductCategoryAdapter(this@ShopFragment, fragments)
-            TabLayoutMediator(tlContent, vpContent) { tab, position ->
+            vpShops.adapter = ProductCategoryAdapter(this@ShopFragment, fragments)
+            TabLayoutMediator(tlShops, vpShops) { tab, position ->
                 tab.text = saleItems[position].category.name
             }.attach()
         }
