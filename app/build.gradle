@@ -45,6 +45,8 @@ dependencies {
     implementation Dependencies.CORE_KTX
     implementation Dependencies.CONSTRAINT_LAYOUT
 
+    implementation Dependencies.SWIPE_REFRESH_LAYOUT
+
     implementation Dependencies.GLIDE
 
     implementation Dependencies.FRAGMENT_KTX
