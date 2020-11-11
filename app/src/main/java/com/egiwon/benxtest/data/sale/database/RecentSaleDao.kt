@@ -10,7 +10,7 @@ import io.reactivex.Maybe
 @Dao
 interface RecentSaleDao {
 
-    @Query("SELECT * FROM recentsaleitem WHERE artistId = :id")
+    @Query("SELECT * FROM recentsaleitem WHERE artistId = :id ORDER BY createTime DESC")
     fun getRecentSaleItem(id: Int): Maybe<List<SaleEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

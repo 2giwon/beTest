@@ -14,7 +14,8 @@ data class SaleEntity(
     val isSoldOut: Boolean = false,
     val name: String = "",
     val originalPrice: Int = 0,
-    val salePrice: Int = 0
+    val salePrice: Int = 0,
+    val createTime: Long = 0
 )
 
 fun SaleItem.mapToSaleEntity(artistId: Int): SaleEntity =
@@ -28,5 +29,6 @@ fun SaleItem.mapToSaleEntity(artistId: Int): SaleEntity =
         isSoldOut = isSoldOut,
         name = name,
         originalPrice = originalPrice,
-        salePrice = salePrice
+        salePrice = salePrice,
+        createTime = System.currentTimeMillis()
     )
