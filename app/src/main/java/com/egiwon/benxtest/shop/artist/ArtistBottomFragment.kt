@@ -49,9 +49,7 @@ class ArtistBottomFragment : BottomSheetDialogFragment() {
         ) {}
 
         arguments?.getParcelableArrayList<Artist>(KEY_ARTIST)?.let {
-            @Suppress("UNCHECKED_CAST")
-            (binding.rvArtist.adapter as? BaseAdapter<Artist>)?.replaceItems(it)
-            binding.rvArtist.adapter?.notifyDataSetChanged()
+            binding.list = it
         }
     }
 
