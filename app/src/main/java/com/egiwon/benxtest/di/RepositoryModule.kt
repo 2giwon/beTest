@@ -1,8 +1,9 @@
 package com.egiwon.benxtest.di
 
 import com.egiwon.benxtest.data.ShopRepository
-import com.egiwon.benxtest.data.shop.ShopDataSource
-import com.egiwon.benxtest.data.shop.ShopRepositoryImpl
+import com.egiwon.benxtest.data.ShopRepositoryImpl
+import com.egiwon.benxtest.data.sale.ShopLocalDataSource
+import com.egiwon.benxtest.data.shop.ShopRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +16,9 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideShopRepository(shopDataSource: ShopDataSource): ShopRepository =
-        ShopRepositoryImpl(shopDataSource)
+    fun provideShopRepository(
+        shopRemoteDataSource: ShopRemoteDataSource,
+        shopLocalDataSource: ShopLocalDataSource
+    ): ShopRepository =
+        ShopRepositoryImpl(shopRemoteDataSource, shopLocalDataSource)
 }

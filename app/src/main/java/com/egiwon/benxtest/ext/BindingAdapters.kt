@@ -26,9 +26,9 @@ fun replaceBannerItem(recyclerView: RecyclerView, items: List<Banner>?) {
 
 @Suppress("UNCHECKED_CAST")
 @BindingAdapter("replaceItem")
-fun RecyclerView.replaceItem(items: List<Any>?) {
+fun replaceItem(recyclerView: RecyclerView, items: List<Any>?) {
     if (items != null) {
-        (adapter as? BaseAdapter<Any>)?.run {
+        (recyclerView.adapter as? BaseAdapter<Any>)?.run {
             replaceItems(items)
             notifyDataSetChanged()
         }
@@ -36,15 +36,26 @@ fun RecyclerView.replaceItem(items: List<Any>?) {
 }
 
 @BindingAdapter("loadImageUrl")
-fun ImageView.loadImageUrlByGlide(imageUrl: String?) {
+fun loadImageUrlByGlide(imageView: ImageView, imageUrl: String?) {
     if (imageUrl != null) {
 
-        Glide.with(this)
+        Glide.with(imageView)
             .load(imageUrl)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(this)
+            .into(imageView)
     }
+}
 
+@BindingAdapter("loadCircleImageUrl")
+fun loadCircleImageByGlide(imageView: ImageView, imageUrl: String?) {
+    if (imageUrl != null) {
+
+        Glide.with(imageView)
+            .load(imageUrl)
+            .circleCrop()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(imageView)
+    }
 }
 
 @BindingAdapter("textToPrice")

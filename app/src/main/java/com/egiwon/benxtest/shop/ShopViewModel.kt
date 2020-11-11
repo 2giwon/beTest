@@ -7,13 +7,18 @@ import com.egiwon.benxtest.R
 import com.egiwon.benxtest.base.BaseViewModel
 import com.egiwon.benxtest.data.ShopRepository
 import com.egiwon.benxtest.data.entity.ShopInfoResponse
+import com.egiwon.benxtest.data.sale.entity.SaleEntity
+import com.egiwon.benxtest.data.sale.entity.mapToSaleEntity
 import com.egiwon.benxtest.shop.artist.ARTIST
 import com.egiwon.benxtest.shop.model.Artist
 import com.egiwon.benxtest.shop.model.Banner
 import com.egiwon.benxtest.shop.model.Notice
 import com.egiwon.benxtest.shop.model.SaleItem
+import com.egiwon.benxtest.shop.model.ShopInfo
 import com.egiwon.benxtest.shop.model.ShopItem
+import com.egiwon.benxtest.shop.model.mapToSaleItem
 import com.egiwon.benxtest.shop.model.mapToShopInfo
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -44,6 +49,14 @@ class ShopViewModel @ViewModelInject constructor(
     private val _artists = MutableLiveData<List<Artist>>()
     val artists: LiveData<List<Artist>> get() = _artists
 
+    private val _recentSelectedSaleItems = MutableLiveData<List<SaleItem>>()
+    val recentSelectedSaleItems: LiveData<List<SaleItem>> get() = _recentSelectedSaleItems
+
+    private val _isShowRecentSelectedItems = MutableLiveData<Boolean>()
+    val isShowRecentSelectedItem: LiveData<Boolean> get() = _isShowRecentSelectedItems
+
+    private var _shopInfo: ShopInfo = ShopInfo()
+
     private val _map = HashMap<Int, List<SaleItem>>()
 
     private var _currentArtistId = ARTIST.BTS.value
@@ -57,15 +70,21 @@ class ShopViewModel @ViewModelInject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeBy(
                 onSuccess = {
+                    _shopInfo = it
                     _banners.value = it.banners
                     _shopItems.value = it.shopItems
                     _noticeItems.value = it.notices
-                    _artists.value = it.artist
                     findCurrentArtist(it.artist, _currentArtistId)
+                    getRecentlySelectedSaleItem()
                 },
                 onError = { toastMessageMutableLiveData.value = R.string.error_load_fail_shop_info }
             )
             .addTo(compositeDisposable)
+    }
+
+    fun loadShopInfo(artistId: Int) {
+        _currentArtistId = artistId
+        loadShopInfo()
     }
 
     private fun findCurrentArtist(artists: List<Artist>, artistId: Int) {
@@ -83,5 +102,38 @@ class ShopViewModel @ViewModelInject constructor(
                 }
             }
         }
+    }
+
+    private fun getRecentlySelectedSaleItem() {
+        repository.loadRecentSaleItem(_currentArtistId)
+            .subscribeOn(Schedulers.io())
+            .map { it.map(SaleEntity::mapToSaleItem) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    _recentSelectedSaleItems.value = it
+                    _isShowRecentSelectedItems.value = it.isNotEmpty()
+                },
+                onError = {
+                    toastMessageMutableLiveData.value =
+                        R.string.error_load_recently_selected_sale_items
+                }
+            )
+            .addTo(compositeDisposable)
+    }
+
+    fun requestAddRecentlySelectedSaleItem(saleItem: SaleItem) {
+        Single.fromCallable {
+            repository.insertRecentSaleItem(saleItem.mapToSaleEntity(_currentArtistId))
+        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .addTo(compositeDisposable)
+    }
+
+
+    fun getArtists() {
+        _artists.value = _shopInfo.artist
     }
 }

@@ -1,9 +1,11 @@
-package com.egiwon.benxtest.shop.model
+package com.egiwon.benxtest.data.sale.entity
 
-import com.egiwon.benxtest.data.entity.SaleResponse
-import com.egiwon.benxtest.data.sale.entity.SaleEntity
+import androidx.room.Entity
+import com.egiwon.benxtest.shop.model.SaleItem
 
-data class SaleItem(
+@Entity(tableName = "recentsaleitem", primaryKeys = ["artistId", "id"])
+data class SaleEntity(
+    val artistId: Int = 0,
     val id: Int = 0,
     val imageUrl: String = "",
     val isFcOnly: Boolean = false,
@@ -15,21 +17,9 @@ data class SaleItem(
     val salePrice: Int = 0
 )
 
-fun SaleResponse.mapToSaleItem(): SaleItem =
-    SaleItem(
-        id = id,
-        imageUrl = imageUrl,
-        isFcOnly = isFcOnly,
-        isMonopoly = isMonopoly,
-        isPreOrder = isPreOrder,
-        isSoldOut = isSoldOut,
-        name = name,
-        originalPrice = originalPrice,
-        salePrice = salePrice
-    )
-
-fun SaleEntity.mapToSaleItem(): SaleItem =
-    SaleItem(
+fun SaleItem.mapToSaleEntity(artistId: Int): SaleEntity =
+    SaleEntity(
+        artistId = artistId,
         id = id,
         imageUrl = imageUrl,
         isFcOnly = isFcOnly,

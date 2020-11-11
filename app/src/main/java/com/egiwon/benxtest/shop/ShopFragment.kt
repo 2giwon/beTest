@@ -12,8 +12,11 @@ import com.egiwon.benxtest.base.BaseAdapter
 import com.egiwon.benxtest.base.BaseFragment
 import com.egiwon.benxtest.databinding.FragmentShopBinding
 import com.egiwon.benxtest.shop.artist.ARTIST
+import com.egiwon.benxtest.shop.artist.ArtistBottomFragment
 import com.egiwon.benxtest.shop.banner.BannerAdapter
+import com.egiwon.benxtest.shop.model.Artist
 import com.egiwon.benxtest.shop.model.Notice
+import com.egiwon.benxtest.shop.model.SaleItem
 import com.egiwon.benxtest.shop.model.ShopItem
 import com.egiwon.benxtest.shop.product.ProductFragment
 import com.egiwon.benxtest.shop.product.tab.ProductCategoryAdapter
@@ -21,9 +24,12 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.fragment_shop) {
+class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.fragment_shop),
+    ArtistBottomFragment.OnArtistClickActionListener {
 
     override val viewModel: ShopViewModel by viewModels()
+
+    private lateinit var dialog: ArtistBottomFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +39,9 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
             initAdapter()
             setClickScrollToTop()
             swipeContainer.setOnRefreshListener { viewModel.loadShopInfo() }
+            tvToolbarTitle.setOnClickListener {
+                viewModel.getArtists()
+            }
         }
         viewModel.loadShopInfo()
     }
@@ -41,10 +50,19 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
         val snapHelper: SnapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(rvBanner)
         rvBanner.adapter = BannerAdapter(R.layout.item_banner, BR.banner)
+        rvBanner.setHasFixedSize(true)
+
+        rvRecentlySales.adapter = object : BaseAdapter<SaleItem>(
+            R.layout.item_recently_sale,
+            BR.saleItem
+        ) {}
+        rvRecentlySales.setHasFixedSize(true)
+
         rvNotices.adapter = object : BaseAdapter<Notice>(
             R.layout.item_notice,
             BR.notice
         ) {}
+        rvNotices.setHasFixedSize(true)
     }
 
     private fun initViewPager(saleItems: List<ShopItem>) {
@@ -60,6 +78,11 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
             }.attach()
         }
 
+    }
+
+    override fun onArtistClick(artist: Artist) {
+        dialog.dismiss()
+        viewModel.loadShopInfo(artistId = artist.id)
     }
 
     override fun setupObserve() {
@@ -78,6 +101,12 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
 
         viewModel.loadingBar.observe(viewLifecycleOwner, Observer {
             binding.swipeContainer.isRefreshing = it
+        })
+
+        viewModel.artists.observe(viewLifecycleOwner, Observer {
+            dialog = ArtistBottomFragment.newInstance(it)
+            dialog.setTargetFragment(this@ShopFragment, 0)
+            dialog.show(parentFragmentManager, ArtistBottomFragment::javaClass.name)
         })
     }
 

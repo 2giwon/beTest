@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -116,7 +115,7 @@
                         android:id="@+id/layout_recently_sales"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="@{vm.isShowRecentSelectedItem ? View.VISIBLE : View.GONE}"
                         app:layout_constraintTop_toBottomOf="@id/divider2"
                         tools:visibility="visible">
 
@@ -137,6 +136,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:orientation="horizontal"
+                            app:replaceItem="@{vm.recentSelectedSaleItems}"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintTop_toBottomOf="@id/tv_recently_sales"
                             tools:listitem="@layout/item_recently_sale" />
