@@ -12,17 +12,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:padding="16dp"
+        android:layout_height="108dp"
         android:background="?android:attr/selectableItemBackground">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_notice_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{notice.title}"
             android:textSize="20dp"
             android:textStyle="bold"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toTopOf="@id/tv_notice_date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,10 +35,12 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:textSize="16dp"
-            app:textToDate="@{notice.date}"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_notice_title"
+            app:textToDate="@{notice.date}"
             tools:text="2020.11.09" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
