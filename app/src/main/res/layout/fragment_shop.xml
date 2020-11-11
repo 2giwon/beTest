@@ -161,11 +161,12 @@
                         app:layout_constraintTop_toBottomOf="@id/layout_recently_sales"
                         tools:text="공지 사항" />
 
-                    <com.egiwon.benxtest.shop.product.NoScrollRecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_notices"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
+                        android:nestedScrollingEnabled="false"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintTop_toBottomOf="@id/tv_notice"
                         app:replaceItem="@{vm.noticeItems}"

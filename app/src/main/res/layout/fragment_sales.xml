@@ -20,10 +20,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.egiwon.benxtest.shop.product.NoScrollRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_products"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
             app:layoutManager="GridLayoutManager"
             app:layout_constraintTop_toTopOf="parent"
             app:replaceItem="@{vm.mapSaleItems.get(categoryId)}"
