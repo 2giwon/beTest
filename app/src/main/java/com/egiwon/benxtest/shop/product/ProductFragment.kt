@@ -24,7 +24,8 @@ class ProductFragment : BaseFragment<FragmentSalesBinding, ShopViewModel>(
             vm = viewModel
             rvProducts.adapter = object : BaseAdapter<SaleItem>(
                 R.layout.item_product,
-                BR.saleItem
+                BR.saleItem,
+                onClick = onClickProductItem
             ) {}
             rvProducts.setHasFixedSize(true)
         }
@@ -33,6 +34,10 @@ class ProductFragment : BaseFragment<FragmentSalesBinding, ShopViewModel>(
             binding.categoryId = it
             viewModel.getShopItems(it)
         }
+    }
+
+    private val onClickProductItem: (SaleItem) -> Unit = { saleItem ->
+        viewModel.requestAddRecentlySelectedSaleItem(saleItem)
     }
 
     companion object {
