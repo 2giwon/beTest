@@ -19,5 +19,5 @@
     <string name="select_banner_text">배너가 선택되었습니다.</string>
     <string name="select_recently_sale_item_text">최근 본 상품을 선택 했습니다.</string>
     <string name="select_notice_text">공지사항을 선택했습니다.</string>
-    <string name="select_show_all_products_text">모든 상품 보기</string>
+    <string name="select_show_all_products_text">모든 상품 보기를 선택 했습니다.</string>
 </resources>
