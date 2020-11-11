@@ -12,4 +12,7 @@
     <string name="notice_title">공지 사항</string>
     <string name="notice_date">"%1$tY.%1$tm.%1$td"</string>
     <string name="show_all_products_text">모든 상품 보기</string>
+    <string name="select_artist_shop_text">아티스트 및 샵 선택</string>
+    <string name="text_ok">확인</string>
+    <string name="error_load_recently_selected_sale_items">최근에 본 상품을 가져오지 못했습니다.</string>
 </resources>
