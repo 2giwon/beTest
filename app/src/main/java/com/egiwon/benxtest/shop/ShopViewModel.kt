@@ -9,7 +9,6 @@ import com.egiwon.benxtest.data.ShopRepository
 import com.egiwon.benxtest.data.entity.ShopInfoResponse
 import com.egiwon.benxtest.data.sale.entity.SaleEntity
 import com.egiwon.benxtest.data.sale.entity.mapToSaleEntity
-import com.egiwon.benxtest.shop.artist.ARTIST
 import com.egiwon.benxtest.shop.model.Artist
 import com.egiwon.benxtest.shop.model.Banner
 import com.egiwon.benxtest.shop.model.Notice
@@ -59,7 +58,7 @@ class ShopViewModel @ViewModelInject constructor(
 
     private val _map = HashMap<Int, List<SaleItem>>()
 
-    private var _currentArtistId = ARTIST.BTS.value
+    private var _currentArtistId = BTS
 
     fun loadShopInfo() {
         repository.loadShopInfo(_currentArtistId)
@@ -135,5 +134,9 @@ class ShopViewModel @ViewModelInject constructor(
 
     fun getArtists() {
         _artists.value = _shopInfo.artist
+    }
+
+    companion object {
+        const val BTS = 1
     }
 }
