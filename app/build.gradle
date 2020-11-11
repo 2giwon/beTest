@@ -66,6 +66,10 @@ dependencies {
     implementation Dependencies.RX_KOTLIN
     implementation Dependencies.RX_BINDING
 
+    implementation Dependencies.ROOM_RUNTIME
+    kapt Dependencies.ROOM_COMPILER
+    implementation Dependencies.ROOM_RXJAVA
+
     testImplementation TestDependencies.JUNIT
     androidTestImplementation TestDependencies.EXT_JUNIT
     androidTestImplementation TestDependencies.ESPRESSO
