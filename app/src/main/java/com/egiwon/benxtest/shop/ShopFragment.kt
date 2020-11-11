@@ -11,7 +11,6 @@ import com.egiwon.benxtest.R
 import com.egiwon.benxtest.base.BaseAdapter
 import com.egiwon.benxtest.base.BaseFragment
 import com.egiwon.benxtest.databinding.FragmentShopBinding
-import com.egiwon.benxtest.shop.artist.ARTIST
 import com.egiwon.benxtest.shop.artist.ArtistBottomFragment
 import com.egiwon.benxtest.shop.banner.BannerAdapter
 import com.egiwon.benxtest.shop.model.Artist
@@ -83,6 +82,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
 
         with(binding) {
             vpShops.adapter = ProductCategoryAdapter(this@ShopFragment, fragments)
+            vpShops.offscreenPageLimit = fragments.size
             TabLayoutMediator(tlShops, vpShops) { tab, position ->
                 tab.text = saleItems[position].category.name
             }.attach()
@@ -100,7 +100,7 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
 
         viewModel.artistId.observe(viewLifecycleOwner, Observer {
             binding.tvToolbarTitle.text = when (it) {
-                ARTIST.BTS.value -> getString(R.string.BTS)
+                ShopViewModel.BTS -> getString(R.string.BTS)
                 else -> getString(R.string.TXT)
             }
         })

@@ -16,20 +16,15 @@
             type="com.egiwon.benxtest.shop.ShopViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_products"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="false"
+        app:layoutManager="GridLayoutManager"
+        app:layout_constraintTop_toTopOf="parent"
+        app:replaceItem="@{vm.mapSaleItems.get(categoryId)}"
+        app:spanCount="2"
+        tools:listitem="@layout/item_product" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_products"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            app:layoutManager="GridLayoutManager"
-            app:layout_constraintTop_toTopOf="parent"
-            app:replaceItem="@{vm.mapSaleItems.get(categoryId)}"
-            app:spanCount="2"
-            tools:listitem="@layout/item_product" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
