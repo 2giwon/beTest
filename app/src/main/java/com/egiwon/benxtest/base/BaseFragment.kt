@@ -4,13 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.egiwon.benxtest.util.ToastManager
 
 abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel>(
     @LayoutRes private val layoutResId: Int
@@ -34,16 +33,8 @@ abstract class BaseFragment<VDB : ViewDataBinding, VM : BaseViewModel>(
 
     protected open fun setupObserve() {
         viewModel.toastMessageLiveData.observe(viewLifecycleOwner, Observer {
-            showToast(it)
+            ToastManager.showToast(requireContext(), it)
         })
-    }
-
-    protected fun showToast(text: String) {
-        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showToast(@StringRes textResId: Int) {
-        showToast(getString(textResId))
     }
 
 }

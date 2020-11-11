@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_margin="16dp"
+        android:padding="16dp"
         android:background="?android:attr/selectableItemBackground">
 
         <androidx.appcompat.widget.AppCompatTextView

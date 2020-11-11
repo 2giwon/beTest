@@ -20,6 +20,7 @@ import com.egiwon.benxtest.shop.model.SaleItem
 import com.egiwon.benxtest.shop.model.ShopItem
 import com.egiwon.benxtest.shop.product.ProductFragment
 import com.egiwon.benxtest.shop.product.tab.ProductCategoryAdapter
+import com.egiwon.benxtest.util.ToastManager
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,6 +43,9 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
             tvToolbarTitle.setOnClickListener {
                 viewModel.getArtists()
             }
+            buttonShowAllSales.setOnClickListener {
+                ToastManager.showToast(requireContext(), R.string.select_show_all_products_text)
+            }
         }
         viewModel.loadShopInfo()
     }
@@ -54,13 +58,19 @@ class ShopFragment : BaseFragment<FragmentShopBinding, ShopViewModel>(R.layout.f
 
         rvRecentlySales.adapter = object : BaseAdapter<SaleItem>(
             R.layout.item_recently_sale,
-            BR.saleItem
+            BR.saleItem,
+            onClick = {
+                ToastManager.showToast(requireContext(), R.string.select_recently_sale_item_text)
+            }
         ) {}
         rvRecentlySales.setHasFixedSize(true)
 
         rvNotices.adapter = object : BaseAdapter<Notice>(
             R.layout.item_notice,
-            BR.notice
+            BR.notice,
+            onClick = {
+                ToastManager.showToast(requireContext(), R.string.select_notice_text)
+            }
         ) {}
         rvNotices.setHasFixedSize(true)
     }

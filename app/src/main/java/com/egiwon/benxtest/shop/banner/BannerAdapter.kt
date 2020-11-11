@@ -6,8 +6,10 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.egiwon.benxtest.R
 import com.egiwon.benxtest.base.BindingViewHolder
 import com.egiwon.benxtest.shop.model.Banner
+import com.egiwon.benxtest.util.ToastManager
 
 class BannerAdapter(
     @LayoutRes private val layoutResId: Int,
@@ -20,7 +22,11 @@ class BannerAdapter(
         val view =
             LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
         val binding: ViewDataBinding = requireNotNull(DataBindingUtil.bind(view))
-        return BindingViewHolder(binding, bindingId)
+        return BindingViewHolder(binding, bindingId).apply {
+            itemView.setOnClickListener {
+                ToastManager.showToast(itemView.context, R.string.select_banner_text)
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder, position: Int) {

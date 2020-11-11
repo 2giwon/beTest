@@ -11,6 +11,7 @@ import com.egiwon.benxtest.base.BaseFragment
 import com.egiwon.benxtest.databinding.FragmentSalesBinding
 import com.egiwon.benxtest.shop.ShopViewModel
 import com.egiwon.benxtest.shop.model.SaleItem
+import com.egiwon.benxtest.util.ToastManager
 
 class ProductFragment : BaseFragment<FragmentSalesBinding, ShopViewModel>(
     R.layout.fragment_sales
@@ -38,6 +39,7 @@ class ProductFragment : BaseFragment<FragmentSalesBinding, ShopViewModel>(
 
     private val onClickProductItem: (SaleItem) -> Unit = { saleItem ->
         viewModel.requestAddRecentlySelectedSaleItem(saleItem)
+        ToastManager.showToast(requireContext(), R.string.select_sale_text)
     }
 
     companion object {

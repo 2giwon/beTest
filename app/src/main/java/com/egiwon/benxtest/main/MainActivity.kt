@@ -9,6 +9,7 @@ import com.egiwon.benxtest.DummyFragment
 import com.egiwon.benxtest.R
 import com.egiwon.benxtest.databinding.ActivityMainBinding
 import com.egiwon.benxtest.shop.ShopFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,14 +23,12 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         initBottomNavigationView()
-        setSelectItemListener()
-        binding.bottomNavigationView.setOnNavigationItemReselectedListener {
-
-        }
+        binding.bottomNavigationView.setSelectItemListener()
     }
 
-    private fun setSelectItemListener() {
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+    private fun BottomNavigationView.setSelectItemListener() {
+        setOnNavigationItemReselectedListener {}
+        setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_shop -> {
                     showFragment(ShopFragment())

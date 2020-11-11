@@ -60,7 +60,8 @@ fun loadCircleImageByGlide(imageView: ImageView, imageUrl: String?) {
 
 @BindingAdapter("textToPrice")
 fun textToPrice(textView: AppCompatTextView, price: Int) {
-    val decimalFormat = DecimalFormat("#,##0")
+    val symbol = Currency.getInstance(Locale.getDefault()).symbol
+    val decimalFormat = DecimalFormat("'$symbol' #,##0")
     textView.text = decimalFormat.format(price)
 }
 
