@@ -23,10 +23,11 @@ object Dependencies {
     private const val HILT_JETPACK_VER = "1.0.0-alpha01"
     private const val GLIDE_VER = "4.11.0"
     private const val RXJAVA_VER = "2.2.16"
+    private const val ROOM_VER = "2.2.5"
 
     const val KOTLIN_STDLIB = "org.jetbrains.kotlin:kotlin-stdlib:${Version.KOTLIN}"
 
-    const val MATERIAL = "com.google.android.material:material:1.1.0"
+    const val MATERIAL = "com.google.android.material:material:1.2.1"
     const val CORE_KTX = "androidx.core:core-ktx:1.3.0"
     const val CONSTRAINT_LAYOUT = "androidx.constraintlayout:constraintlayout:1.1.3"
 
@@ -42,6 +43,10 @@ object Dependencies {
     const val RX_ANDROID = "io.reactivex.rxjava2:rxandroid:2.1.1"
     const val RX_KOTLIN = "io.reactivex.rxjava2:rxkotlin:2.4.0"
     const val RX_BINDING = "com.jakewharton.rxbinding3:rxbinding:3.1.0"
+
+    const val ROOM_RUNTIME = "androidx.room:room-runtime:$ROOM_VER"
+    const val ROOM_COMPILER = "androidx.room:room-compiler:$ROOM_VER"
+    const val ROOM_RXJAVA = "androidx.room:room-rxjava2:$ROOM_VER"
 
     const val LIFECYCLE_EXT = "androidx.lifecycle:lifecycle-extensions:$LIFECYCLE_VER"
     const val LIFECYCLE_VIEWMODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx:$LIFECYCLE_VER"
