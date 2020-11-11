@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.egiwon.benxtest.R
 import com.egiwon.benxtest.base.BindingViewHolder
+import com.egiwon.benxtest.databinding.ItemBannerBinding
 import com.egiwon.benxtest.shop.model.Banner
 import com.egiwon.benxtest.util.ToastManager
 
@@ -19,9 +19,13 @@ class BannerAdapter(
     private val list = mutableListOf<Banner>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(layoutResId, parent, false)
-        val binding: ViewDataBinding = requireNotNull(DataBindingUtil.bind(view))
+        val binding = DataBindingUtil.inflate<ItemBannerBinding>(
+            LayoutInflater.from(parent.context),
+            layoutResId,
+            parent,
+            false
+        )
+
         return BindingViewHolder(binding, bindingId).apply {
             itemView.setOnClickListener {
                 ToastManager.showToast(itemView.context, R.string.select_banner_text)
